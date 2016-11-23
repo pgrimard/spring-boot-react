@@ -6,8 +6,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 export default {
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    server: './app/scripts/server.js'
-    // login: './app/scripts/login.js'
+    server: './app/scripts/server.js',
+    client: './app/scripts/client.js'
   },
   output: {
     path: path.join(__dirname, 'public'),
@@ -17,7 +17,7 @@ export default {
     extensions: ['', '.js', '.css'],
     alias: {
       'styles': __dirname + '/app/styles',
-      'components': __dirname + '/app/scripts',
+      'components': __dirname + '/app/scripts/components',
       'util': __dirname + '/app/scripts/util',
       'images': __dirname + '/app/images'
     }
@@ -40,19 +40,9 @@ export default {
       filename: 'index.html',
       inject: false,
       minify: {
-        collapseWhitespace: true
-      }
-      // excludeChunks: ['login']
+        collapseWhitespace: false
+      },
+      excludeChunks: ['server']
     })
-    // new HtmlWebpackPlugin({
-    //   hash: true,
-    //   template: 'app/login.html',
-    //   filename: 'login.html',
-    //   inject: 'body',
-    //   minify: {
-    //     collapseWhitespace: false
-    //   },
-    //   excludeChunks: ['main']
-    // })
   ]
 }
