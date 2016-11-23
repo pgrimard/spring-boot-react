@@ -26,7 +26,7 @@ public class Application extends WebMvcConfigurerAdapter {
         configurer.setEngineName("nashorn");
         configurer.setScripts(
                 "static/polyfill.js",
-                "public/main.js"
+                "public/server.js"
         );
         configurer.setRenderFunction("render");
         configurer.setSharedEngine(false);
