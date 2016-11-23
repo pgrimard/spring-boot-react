@@ -1,9 +1,5 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import 'styles/main.css';
-
-function App(props) {
-  return <ul>{Object.keys(props).map((key) => <li key={key}>{props[key]}</li>)}</ul>;
-}
+import App from 'components/App';
 
 window.render = (template, {state}) => template.replace('{{output}}', renderToString(<App {...JSON.parse(state)}/>));
