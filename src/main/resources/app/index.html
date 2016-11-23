@@ -5,9 +5,6 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <% for (var css in htmlWebpackPlugin.files.css) { %>
-    <link href="/<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
-    <% } %>
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -16,8 +13,5 @@
 
 <div id="app">{{output}}</div>
 
-<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-<script src="/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
-<% } %>
 </body>
 </html>
