@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "quotes": [2, "single"],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "react/prop-types": [0] // Disables propTypes validation, look to remove this later
+  },
+  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "MQ": false, // Required because MapQuest API is loaded in a normal script tag
+    "module": false // Until all code is refactored to ES6
+  }
+}
