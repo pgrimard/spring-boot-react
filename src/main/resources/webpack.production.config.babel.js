@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   entry: {
-    main: './app/scripts/main.js'
+    server: './app/scripts/server.js'
     // login: './app/scripts/login.js'
   },
   output: {
