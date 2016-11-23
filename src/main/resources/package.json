@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "clean": "rimraf ./static && mkdir public",
+    "clean": "rimraf ./public && mkdir public",
     "lint": "eslint ./app",
     "predev": "npm run clean && npm run lint",
     "dev": "webpack -d",
