@@ -17,7 +17,7 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    @GetMapping("/{path:(?!.*\\.js)(?!.*\\.css).*$}")
+    @GetMapping("/{path:(?!.*.js|.*.css|.*.jpg).*$}")
     public String index() {
         return "index";
     }
