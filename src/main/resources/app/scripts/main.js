@@ -5,9 +5,4 @@ function App(props) {
   return <ul>{Object.keys(props).map((key) => <li key={key}>{props[key]}</li>)}</ul>;
 }
 
-window.render = (template, {state}) => {
-  if(!state)
-    return template;
-
-  return template.replace('{{output}}', renderToString(<App {...JSON.parse(state)}/>));
-};
+window.render = (template, {state}) => template.replace('{{output}}', renderToString(<App {...JSON.parse(state)}/>));
