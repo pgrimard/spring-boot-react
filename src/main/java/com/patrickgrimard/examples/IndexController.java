@@ -17,8 +17,8 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    @GetMapping("/{path:(?!.*\\.js)(?!.*\\.css).*$}/**")
-    public String index() throws JsonProcessingException {
+    @GetMapping("/{path:(?!.*\\.js)(?!.*\\.css).*$}")
+    public String index() {
         return "index";
     }
 
