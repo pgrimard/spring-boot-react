@@ -18,7 +18,12 @@ import java.util.Map;
 public class IndexController {
 
     @GetMapping("/{path:(?!.*\\.js)(?!.*\\.css).*$}/**")
-    public String index(Model model) throws JsonProcessingException {
+    public String index() throws JsonProcessingException {
+        return "index";
+    }
+
+    @GetMapping("/items")
+    public String hello(Model model) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         Map<String, Object> items = new HashMap<>();
@@ -29,17 +34,6 @@ public class IndexController {
 
         model.addAttribute("state", mapper.writeValueAsString(items));
 
-        return "index";
-    }
-
-    @GetMapping("/hello")
-    public String hello(Model model) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-
-        Map<String, Object> items = new HashMap<>();
-        items.put("message", "Hello React!");
-
-        model.addAttribute("state", mapper.writeValueAsString(items));
         return "index";
     }
 }
