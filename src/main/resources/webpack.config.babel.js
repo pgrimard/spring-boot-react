@@ -11,7 +11,7 @@ export default {
   },
   output: {
     path: path.join(__dirname, 'public'),
-    filename: '[name].js'
+    filename: '/[name].js'
   },
   resolve: {
     extensions: ['', '.js', '.css'],
@@ -33,12 +33,11 @@ export default {
   postcss: [ autoprefixer({ browsers: ['last 5 versions'] }) ],
   sassLoader: {precision: 8},
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('/[name].css'),
     new HtmlWebpackPlugin({
       hash: true,
       template: 'app/index.html',
       filename: 'index.html',
-      inject: false,
       minify: {
         collapseWhitespace: false
       },
