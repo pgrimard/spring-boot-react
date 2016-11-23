@@ -17,7 +17,7 @@ public class Application extends WebMvcConfigurerAdapter {
 
     @Bean
     public ViewResolver viewResolver() {
-        return new ScriptTemplateViewResolver("/static/", ".html");
+        return new ScriptTemplateViewResolver("/public/", ".html");
     }
 
     @Bean
@@ -25,8 +25,8 @@ public class Application extends WebMvcConfigurerAdapter {
         ScriptTemplateConfigurer configurer = new ScriptTemplateConfigurer();
         configurer.setEngineName("nashorn");
         configurer.setScripts(
-                "public/polyfill.js",
-                "static/main.js"
+                "static/polyfill.js",
+                "public/main.js"
         );
         configurer.setRenderFunction("render");
         configurer.setSharedEngine(false);
