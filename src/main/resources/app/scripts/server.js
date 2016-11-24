@@ -6,7 +6,7 @@ import App from 'components/App';
 window.render = (template, model) => {
   const context = createServerRenderContext();
   const state = JSON.parse(model.get('state'));
-  let markup = renderToString(
+  const markup = renderToString(
     <ServerRouter location={state.location} context={context}>
       <App/>
     </ServerRouter>
