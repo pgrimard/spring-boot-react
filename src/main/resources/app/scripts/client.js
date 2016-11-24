@@ -1,5 +1,12 @@
 import React from 'react';
 import {render} from 'react-dom';
-import routes from './routes';
+import {BrowserRouter} from 'react-router';
+import Main from 'components/Main';
 
-render(routes, document.getElementById('app'));
+const markup = (
+  <BrowserRouter>
+    <Main/>
+  </BrowserRouter>
+);
+
+render(markup, document.getElementById('app'));
