@@ -55,10 +55,6 @@
                     <include>public/**</include>
 					<include>static/**</include>
 					<include>**/*.properties</include>
-					<!--<include>**/*.yml</include>-->
-                    <include>node_modules/jvm-npm/src/main/javascript/jvm-npm.js</include>
-					<include>node_modules/react/dist/react.js</include>
-					<include>node_modules/react-dom/dist/react-dom.js</include>
 				</includes>
 				<excludes>
 					<exclude>node_modules</exclude>
