@@ -19,12 +19,18 @@ import java.util.Map;
 public class IndexController {
 
     @GetMapping("/{path:(?!.*.js|.*.css|.*.jpg).*$}/**")
-    public String index(Model model, HttpServletRequest request) {
+    public String index(Model model, HttpServletRequest request) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> state = new HashMap<>();
 
-        state.put("location", request.getServletPath() + "?" + request.getQueryString());
+        String root = request.getServletPath().equals("/index.html") ? "/" : request.getServletPath();
 
-        model.addAttribute("state", state);
+        if(request.getQueryString() != null)
+            state.put("location", root + "?" + request.getQueryString());
+        else
+            state.put("location", root);
+
+        model.addAttribute("state", mapper.writeValueAsString(state));
         return "index";
     }
 
@@ -39,7 +45,6 @@ public class IndexController {
         items.put("3", "redux");
 
         model.addAttribute("state", mapper.writeValueAsString(items));
-
         return "index";
     }
 }
