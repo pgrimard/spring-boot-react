@@ -1,3 +1,14 @@
 html, body {
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    display: inline;
+    margin: 0 1em 0 0;
+}

@@ -10,8 +10,10 @@ export default function App() {
     <div>
       <h1>Hello Server Side Rendering!!</h1>
 
-      <Link to="/">Home</Link>
-      <Link to="/child">Child</Link>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/child">Child</Link></li>
+      </ul>
 
       <Match exactly pattern="/" component={Home}/>
       <Match pattern="/child" component={Child}/>
