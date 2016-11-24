@@ -5,7 +5,7 @@ import Child from 'components/Child';
 import NotFound from 'components/NotFound';
 import 'styles/main.css';
 
-export default function Main() {
+export default function App() {
   return (
     <div>
       <h1>Hello Server Side Rendering!!</h1>

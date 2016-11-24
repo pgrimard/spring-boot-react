@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {BrowserRouter} from 'react-router';
-import Main from 'components/Main';
+import App from 'components/App';
 
 const markup = (
   <BrowserRouter>
-    <Main/>
+    <App/>
   </BrowserRouter>
 );
 
