@@ -1,0 +1,1 @@
+This is a sample application to go along with my blog post https://patrickgrimard.io/2016/11/24/server-side-rendering-with-spring-boot-and-react/
