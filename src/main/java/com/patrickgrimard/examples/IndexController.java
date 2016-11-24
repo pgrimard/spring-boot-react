@@ -18,7 +18,7 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    @GetMapping("/{path:(?!.*.js|.*.css|.*.jpg).*$}/**")
+    @GetMapping("/{path:(?!.*.js|.*.css|.*.jpg).*$}")
     public String index(Model model, HttpServletRequest request) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> state = new HashMap<>();
@@ -26,7 +26,7 @@ public class IndexController {
         String root = request.getServletPath().equals("/index.html") ? "/" : request.getServletPath();
 
         if(request.getQueryString() != null)
-            state.put("location", root + "?" + request.getQueryString());
+            state.put("location", String.format("%s?%s", root, request.getQueryString()));
         else
             state.put("location", root);
 
