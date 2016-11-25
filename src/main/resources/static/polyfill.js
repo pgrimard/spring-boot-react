@@ -5,3 +5,8 @@ var console = {
   warn: print,
   log: print
 };
+window.setTimeout = function() {};
+window.Promise = {
+  resolve: function () {},
+  reject: function() {}
+};
