@@ -18,19 +18,27 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    @GetMapping("/{path:(?!.*.js|.*.css|.*.jpg).*$}")
+    private final ItemRepository itemRepository;
+
+    public IndexController(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
+    @GetMapping("/{path:(?!.*.js|.*.css|.*.jpg|api).*$}")
     public String index(Model model, HttpServletRequest request) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> state = new HashMap<>();
 
+        Map<String, Object> req = new HashMap<>();
         String root = request.getServletPath().equals("/index.html") ? "/" : request.getServletPath();
-
         if(request.getQueryString() != null)
-            state.put("location", String.format("%s?%s", root, request.getQueryString()));
+            req.put("location", String.format("%s?%s", root, request.getQueryString()));
         else
-            state.put("location", root);
+            req.put("location", root);
+        model.addAttribute("req", mapper.writeValueAsString(req));
 
-        model.addAttribute("state", mapper.writeValueAsString(state));
+        Map<String, Object> initialState = new HashMap<>();
+        initialState.put("items", itemRepository.findAll());
+        model.addAttribute("initialState", mapper.writeValueAsString(initialState));
         return "index";
     }
 }
