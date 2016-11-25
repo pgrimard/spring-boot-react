@@ -11,7 +11,10 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div id="app">{{output}}</div>
+<div id="app">SERVER_RENDERED_HTML</div>
+<script>
+    window.__PRELOADED_STATE__ = SERVER_RENDERED_STATE;
+</script>
 
 </body>
 </html>
