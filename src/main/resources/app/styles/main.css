@@ -2,13 +2,21 @@ html, body {
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
 }
 
-ul {
+ul:not(.item-list) {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-ul li {
+ul:not(.item-list) li {
     display: inline;
     margin: 0 1em 0 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+.delete {
+    color: red;
 }
