@@ -2,7 +2,7 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {ServerRouter, createServerRenderContext} from 'react-router';
 import {createStore, applyMiddleware} from 'redux';
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
 import reducer from './reducers';
 import App from 'components/App';

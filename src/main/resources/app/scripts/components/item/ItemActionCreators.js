@@ -23,7 +23,7 @@ export function addItem(name) {
   return (dispatch) => {
     return postResource('/api/items', {name})
       .then(({entity}) => dispatch(receiveAddItem(entity)));
-  }
+  };
 }
 
 export const RECEIVE_DELETE_ITEM = 'RECEIVE_DELETE_ITEM';
@@ -35,6 +35,6 @@ export function receiveDeleteItem(name) {
 export function deleteItem(name) {
   return (dispatch) => {
     return deleteResource(`/api/items/${name}`)
-      .then(({entity}) => dispatch(receiveDeleteItem(name)));
-  }
+      .then(() => dispatch(receiveDeleteItem(name)));
+  };
 }

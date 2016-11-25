@@ -24,7 +24,7 @@ class ItemList extends Component {
           {
             items.map((item) => {
               return (
-                <li key={item.name}>{item.name} <a className="delete" onClick={(e) => {e.preventDefault(); deleteItem(item.name)}}>&times;</a></li>
+                <li key={item.name}>{item.name} <a className="delete" onClick={(e) => {e.preventDefault(); deleteItem(item.name);}}>&times;</a></li>
               );
             })
           }
