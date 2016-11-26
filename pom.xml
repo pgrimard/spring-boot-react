@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.patrickgrimard.examples</groupId>
-	<artifactId>revisiting-server-side-reactjs</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>spring-boot-react</artifactId>
+	<version>1.1.0</version>
 	<packaging>jar</packaging>
 
-	<name>Revisiting Server Side ReactJS</name>
-	<description>Example project demonstrating server side ReactJS with some advanced topics</description>
+	<name>Spring Boot React</name>
+	<description>Sample Spring Boot app with ReactJS server side rendering</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -17,6 +17,25 @@
 		<version>1.4.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
+    <developers>
+        <developer>
+            <id>pgrimard</id>
+            <name>Patrick Grimard</name>
+            <email>pgrimard@gmail.com</email>
+            <organization>Patrick Grimard</organization>
+            <organizationUrl>https://patrickgrimard.io</organizationUrl>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://gitlab.com/pgrimard/spring-boot-react/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://gitlab.com/pgrimard/spring-boot-react</url>
+    </scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -77,6 +96,44 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <workingDirectory>src/main/resources</workingDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v7.1.0</nodeVersion>
+                            <npmVersion>3.10.9</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
