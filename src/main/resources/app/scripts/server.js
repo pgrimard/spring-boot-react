@@ -4,6 +4,7 @@ import {ServerRouter, createServerRenderContext} from 'react-router';
 import {createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
+import serialize from 'serialize-javascript';
 import reducer from './reducers';
 import App from 'components/App';
 
@@ -24,5 +25,5 @@ window.render = (template, model) => {
 
   return template
     .replace('SERVER_RENDERED_HTML', markup)
-    .replace('SERVER_RENDERED_STATE', JSON.stringify(initialState));
+    .replace('SERVER_RENDERED_STATE', serialize(initialState));
 };
