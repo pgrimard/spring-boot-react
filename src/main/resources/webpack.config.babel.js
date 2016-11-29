@@ -18,7 +18,7 @@ export default {
     alias: {
       'styles': __dirname + '/app/styles',
       'components': __dirname + '/app/scripts/components',
-      'util': __dirname + '/app/scripts/util',
+      'utils': __dirname + '/app/scripts/utils',
       'images': __dirname + '/app/images'
     }
   },
