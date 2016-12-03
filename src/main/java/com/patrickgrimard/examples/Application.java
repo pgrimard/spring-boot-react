@@ -40,11 +40,11 @@ public class Application extends WebMvcConfigurerAdapter {
     @Bean
     public CommandLineRunner init(final ItemRepository itemRepository) {
         return (args) -> {
-            itemRepository.save(new Item("JavaScript"));
-            itemRepository.save(new Item("React"));
-            itemRepository.save(new Item("React Router"));
-            itemRepository.save(new Item("Redux"));
-            itemRepository.save(new Item("RxJS"));
+            itemRepository.save(new Item("JavaScript", 0));
+            itemRepository.save(new Item("React", 1));
+            itemRepository.save(new Item("React Router", 2));
+            itemRepository.save(new Item("Redux", 0));
+            itemRepository.save(new Item("RxJS", 4));
         };
     }
 
