@@ -1,1 +1,11 @@
-This is a sample application to go along with my blog post https://patrickgrimard.io/2016/11/24/server-side-rendering-with-spring-boot-and-react/
+= Isomorphic React app with Spring Boot
+
+This is a sample Spring Boot application that demonstrates React's server side
+rendering capabilities as well as how this works with React Router and Redux.  For more
+details, please https://patrickgrimard.io/2016/11/24/server-side-rendering-with-spring-boot-and-react/[read my blog post].
+
+This application uses a custom `V8ScriptTemplateView` which leverages
+https://github.com/eclipsesource/J2V8[J2V8] to render views.  The
+https://github.com/pgrimard/spring-boot-react[master branch] of this repo uses's Spring's
+`ScriptTemplateView` which is a https://www.jcp.org/en/jsr/detail?id=223[JSR-223]
+implementation and uses the Nashorn `ScriptEngine`.
