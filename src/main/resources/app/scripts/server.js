@@ -10,10 +10,8 @@ import App from 'components/App';
 
 window.render = (template, model) => {
   const context = createServerRenderContext();
-  const req = JSON.parse(model.get('req'));
-  const initialState = JSON.parse(model.get('initialState'));
-
-  const store = createStore(reducer, initialState, applyMiddleware(thunkMiddleware));
+  const {req, initialState} = model;
+  const store = createStore(reducer, JSON.parse(initialState), applyMiddleware(thunkMiddleware));
 
   const markup = renderToString(
     <Provider store={store}>
@@ -25,5 +23,5 @@ window.render = (template, model) => {
 
   return template
     .replace('SERVER_RENDERED_HTML', markup)
-    .replace('SERVER_RENDERED_STATE', serialize(initialState, {isJSON: true}));
+    .replace('SERVER_RENDERED_STATE', serialize(JSON.parse(initialState), {isJSON: true}));
 };
