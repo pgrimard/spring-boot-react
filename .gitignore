@@ -26,3 +26,4 @@ nbdist/
 ### Node ###
 node*
 public/
+*.log
