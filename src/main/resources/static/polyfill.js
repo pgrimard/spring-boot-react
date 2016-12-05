@@ -1,4 +1,4 @@
-const console = {
+window.console = {
   error: () => {},
   debug: () => {},
   warn: () => {},
