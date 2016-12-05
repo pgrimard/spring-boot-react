@@ -1,12 +1,7 @@
-var window = this;
-var console = {
-  error: print,
-  debug: print,
-  warn: print,
-  log: print
+const console = {
+  error: () => {},
+  debug: () => {},
+  warn: () => {},
+  log: () => {}
 };
-window.setTimeout = function() {};
-window.Promise = {
-  resolve: function () {},
-  reject: function() {}
-};
+window.setTimeout = () => {};
