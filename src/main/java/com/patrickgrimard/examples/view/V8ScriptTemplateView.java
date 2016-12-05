@@ -135,11 +135,13 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         List<V8Value> scriptResults = Arrays.stream(this.scripts)
                 .map(script -> {
                     try {
-                        return v8.executeObjectScript(getResourceAsString(script));
-                    } catch (IOException e) {
+                        return v8.executeScript(getResourceAsString(script));
+                    } catch (Exception e) {
                         throw new IllegalStateException(String.format("Failed to execute script %s", script), e);
                     }
                 })
+                .filter(o -> o instanceof V8Value)
+                .map(o -> (V8Value) o)
                 .collect(toList());
         runtimeObjects.addAll(scriptResults);
 
