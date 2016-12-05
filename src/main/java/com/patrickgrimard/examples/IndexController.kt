@@ -27,7 +27,7 @@ class IndexController(private val itemRepository: ItemRepository) {
             req.put("location", String.format("%s?%s", root, request.queryString))
         else
             req.put("location", root)
-        model.addAttribute("req", mapper.writeValueAsString(req))
+        model.addAttribute("req", req)
 
         val initialState = HashMap<String, Any>()
         initialState.put("items", itemRepository.findAll())
