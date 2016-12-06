@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class MappingResourceBundleMessageSource extends ResourceBundleMessageSource {
 
-    protected Map<String, Object> getMessagesAsMap(String basename, Locale locale) {
+    protected Map<String, Object> getMessageMap(String basename, Locale locale) {
         Map<String, Object> messages = new HashMap<>();
         ResourceBundle resourceBundle = this.getResourceBundle(basename, locale);
 

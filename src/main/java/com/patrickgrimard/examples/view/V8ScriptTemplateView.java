@@ -160,7 +160,7 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
 
         Locale requestLocale = getLocale(request);
         MappingResourceBundleMessageSource messageSource = BeanFactoryUtils.beanOfTypeIncludingAncestors(getApplicationContext(), MappingResourceBundleMessageSource.class, false, false);
-        Map<String, Object> messageMap = messageSource.getMessagesAsMap(this.resourceBundleBasename, requestLocale);
+        Map<String, Object> messageMap = messageSource.getMessageMap(this.resourceBundleBasename, requestLocale);
         V8Object messages = mapToV8Object(v8, runtimeObjects, messageMap);
         runtimeObjects.add(messages);
 
