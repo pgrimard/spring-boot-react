@@ -11,7 +11,8 @@ import App from 'components/App';
 window.render = (template, model, messages) => {
   const context = createServerRenderContext();
   const {req, initialState} = model;
-  const store = createStore(reducer, JSON.parse(initialState), applyMiddleware(thunkMiddleware));
+  const state = {...JSON.parse(initialState), messages};
+  const store = createStore(reducer, state, applyMiddleware(thunkMiddleware));
 
   const markup = renderToString(
     <Provider store={store}>
@@ -23,6 +24,5 @@ window.render = (template, model, messages) => {
 
   return template
     .replace('SERVER_RENDERED_HTML', markup)
-    .replace('SERVER_RENDERED_STATE', serialize(JSON.parse(initialState), {isJSON: true}))
-    .replace('SERVER_RENDERED_MESSAGES', serialize(messages, {isJSON: true}));
+    .replace('SERVER_RENDERED_STATE', serialize(state, {isJSON: true}));
 };
