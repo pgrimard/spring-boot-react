@@ -24,5 +24,5 @@ window.render = (template, model, messages) => {
   return template
     .replace('SERVER_RENDERED_HTML', markup)
     .replace('SERVER_RENDERED_STATE', serialize(JSON.parse(initialState), {isJSON: true}))
-    .replace('SERVER_RENDERED_MESSAGES', serialize(messages, {isJSON: true}))
+    .replace('SERVER_RENDERED_MESSAGES', serialize(messages, {isJSON: true}));
 };
