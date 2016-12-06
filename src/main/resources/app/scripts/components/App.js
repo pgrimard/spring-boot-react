@@ -1,14 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Match, Link, Miss} from 'react-router';
 import Home from 'components/Home';
 import Child from 'components/Child';
 import NotFound from 'components/NotFound';
 import 'styles/main.css';
 
-export default function App() {
+function App({messages}) {
+  const {title} = messages;
+
   return (
     <div>
-      <h1>Hello Server Side Rendering!!</h1>
+      <h1>{title}</h1>
 
       <ul>
         <li><Link to="/">Home</Link></li>
@@ -22,3 +25,9 @@ export default function App() {
     </div>
   );
 }
+
+function mapStateToProps({messages}) {
+  return {messages};
+}
+
+export default connect(mapStateToProps)(App);
