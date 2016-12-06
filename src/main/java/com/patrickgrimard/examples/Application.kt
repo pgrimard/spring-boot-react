@@ -1,6 +1,6 @@
 package com.patrickgrimard.examples
 
-import com.patrickgrimard.examples.view.MappingResourceBundleMessageSource
+import com.patrickgrimard.examples.context.support.MappingResourceBundleMessageSource
 import com.patrickgrimard.examples.view.V8ScriptTemplateConfigurer
 import com.patrickgrimard.examples.view.V8ScriptTemplateViewResolver
 import org.springframework.boot.CommandLineRunner
