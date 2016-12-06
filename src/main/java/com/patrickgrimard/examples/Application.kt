@@ -1,5 +1,6 @@
 package com.patrickgrimard.examples
 
+import com.patrickgrimard.examples.view.MappingResourceBundleMessageSource
 import com.patrickgrimard.examples.view.V8ScriptTemplateConfigurer
 import com.patrickgrimard.examples.view.V8ScriptTemplateViewResolver
 import org.springframework.boot.CommandLineRunner
@@ -9,8 +10,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter
+import org.springframework.web.servlet.LocaleResolver
 import org.springframework.web.servlet.ViewResolver
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver
+import java.util.*
 
 @SpringBootApplication
 open class Application : WebMvcConfigurerAdapter() {
@@ -39,6 +43,20 @@ open class Application : WebMvcConfigurerAdapter() {
         override fun configureRepositoryRestConfiguration(config: RepositoryRestConfiguration?) {
             config!!.exposeIdsFor(Item::class.java).setBasePath("/api")
         }
+    }
+
+    @Bean
+    open fun localeResolver() : LocaleResolver {
+        val resolver = AcceptHeaderLocaleResolver()
+        resolver.defaultLocale = Locale.US
+        return resolver
+    }
+
+    @Bean
+    open fun messageSource() : MappingResourceBundleMessageSource {
+        val source = MappingResourceBundleMessageSource()
+        source.setBasenames("messages")
+        return source
     }
 
     companion object {
