@@ -13,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,12 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
+import static org.springframework.web.servlet.support.RequestContextUtils.getLocale;
 
 /**
  * Created on 2016-12-03
@@ -42,6 +41,8 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
 
     private static final String DEFAULT_RENDER_FUNCTION = "render";
 
+    private static final String DEFAULT_RESOURCE_BUNDLE_BASENAME = "messages";
+
     private String[] scripts;
 
     private String renderFunction;
@@ -51,6 +52,8 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
     private String[] resourceLoaderPaths;
 
     private ResourceLoader resourceLoader;
+
+    private String resourceBundleBasename;
 
     public V8ScriptTemplateView() {
         setContentType(null);
@@ -91,6 +94,10 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         }
     }
 
+    public void setDefaultResourceBundleBasename(String resourceBundleBasename) {
+        this.resourceBundleBasename = resourceBundleBasename;
+    }
+
     @Override
     protected void initApplicationContext(ApplicationContext context) {
         super.initApplicationContext(context);
@@ -116,6 +123,9 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         if (this.resourceLoader == null) {
             this.resourceLoader = getApplicationContext();
         }
+        if(this.resourceBundleBasename == null) {
+            this.resourceBundleBasename = (viewConfig.getResourceBundleBasename() != null ? viewConfig.getResourceBundleBasename() : DEFAULT_RESOURCE_BUNDLE_BASENAME);
+        }
     }
 
     @Override
@@ -131,6 +141,13 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         V8 v8 = V8.createV8Runtime("window");
 
         List<V8Value> runtimeObjects = new ArrayList<>();
+
+        Locale requestLocale = getLocale(request);
+        WebApplicationContext context = this.getWebApplicationContext();
+        MappingResourceBundleMessageSource messageSource = context.getBean(MappingResourceBundleMessageSource.class);
+        Map<String, Object> messages = messageSource.getMessagesAsMap(this.resourceBundleBasename, requestLocale);
+        V8Object messagesObj = mapToV8Object(v8, runtimeObjects, messages);
+        runtimeObjects.add(messagesObj);
 
         List<V8Value> scriptResults = Arrays.stream(this.scripts)
                 .map(script -> {
@@ -149,7 +166,7 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         V8Object modelAttributes = mapToV8Object(v8, runtimeObjects, model);
         runtimeObjects.add(modelAttributes);
 
-        Object html = v8.executeJSFunction(this.renderFunction, template, modelAttributes);
+        Object html = v8.executeJSFunction(this.renderFunction, template, modelAttributes, messagesObj);
         response.getWriter().write(String.valueOf(html));
 
         runtimeObjects.forEach(V8Value::release);
