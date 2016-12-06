@@ -35,4 +35,9 @@ public interface V8ScriptTemplateConfig {
      * @return The resource loader paths.
      */
     String getResourceLoaderPath();
+
+    /**
+     * @return The resource bundle basename for i18n.
+     */
+    String getResourceBundleBasename();
 }

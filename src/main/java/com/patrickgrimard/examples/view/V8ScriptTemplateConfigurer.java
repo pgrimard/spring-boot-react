@@ -23,6 +23,8 @@ public class V8ScriptTemplateConfigurer implements V8ScriptTemplateConfig {
 
     private String resourceLoaderPath;
 
+    private String resourceBundleBasename;
+
     /**
      * Convenience constructor which allows setting the scripts.  Makes it very easy to define a
      * {@code V8ScriptTemplateConfigurer} with all the default properties.
@@ -120,11 +122,29 @@ public class V8ScriptTemplateConfigurer implements V8ScriptTemplateConfig {
      *
      * <p>Default is "classpath:".
      *
-     * @param resourceLoaderPath
-     * @return
+     * @param resourceLoaderPath The resource loader path.
+     * @return This configurer.
      */
     public V8ScriptTemplateConfigurer resourceLoaderPath(String resourceLoaderPath) {
         this.resourceLoaderPath = resourceLoaderPath;
+        return this;
+    }
+
+    @Override
+    public String getResourceBundleBasename() {
+        return resourceBundleBasename;
+    }
+
+    /**
+     * Set the resource bundle basename to use for i18n if not using the default.
+     *
+     * <p>Default is "messages".
+     *
+     * @param resourceBundleBasename The resource bundle basename.
+     * @return This configurer.
+     */
+    public V8ScriptTemplateConfigurer resourceBundleBasename(String resourceBundleBasename) {
+        this.resourceBundleBasename = resourceBundleBasename;
         return this;
     }
 }
