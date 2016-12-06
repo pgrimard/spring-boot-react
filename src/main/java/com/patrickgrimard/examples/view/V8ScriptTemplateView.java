@@ -13,7 +13,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -123,7 +122,7 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         if (this.resourceLoader == null) {
             this.resourceLoader = getApplicationContext();
         }
-        if(this.resourceBundleBasename == null) {
+        if (this.resourceBundleBasename == null) {
             this.resourceBundleBasename = (viewConfig.getResourceBundleBasename() != null ? viewConfig.getResourceBundleBasename() : DEFAULT_RESOURCE_BUNDLE_BASENAME);
         }
     }
@@ -142,13 +141,6 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
 
         List<V8Value> runtimeObjects = new ArrayList<>();
 
-        Locale requestLocale = getLocale(request);
-        WebApplicationContext context = this.getWebApplicationContext();
-        MappingResourceBundleMessageSource messageSource = context.getBean(MappingResourceBundleMessageSource.class);
-        Map<String, Object> messages = messageSource.getMessagesAsMap(this.resourceBundleBasename, requestLocale);
-        V8Object messagesObj = mapToV8Object(v8, runtimeObjects, messages);
-        runtimeObjects.add(messagesObj);
-
         List<V8Value> scriptResults = Arrays.stream(this.scripts)
                 .map(script -> {
                     try {
@@ -166,7 +158,13 @@ public class V8ScriptTemplateView extends AbstractUrlBasedView {
         V8Object modelAttributes = mapToV8Object(v8, runtimeObjects, model);
         runtimeObjects.add(modelAttributes);
 
-        Object html = v8.executeJSFunction(this.renderFunction, template, modelAttributes, messagesObj);
+        Locale requestLocale = getLocale(request);
+        MappingResourceBundleMessageSource messageSource = BeanFactoryUtils.beanOfTypeIncludingAncestors(getApplicationContext(), MappingResourceBundleMessageSource.class, false, false);
+        Map<String, Object> messageMap = messageSource.getMessagesAsMap(this.resourceBundleBasename, requestLocale);
+        V8Object messages = mapToV8Object(v8, runtimeObjects, messageMap);
+        runtimeObjects.add(messages);
+
+        Object html = v8.executeJSFunction(this.renderFunction, template, modelAttributes, messages);
         response.getWriter().write(String.valueOf(html));
 
         runtimeObjects.forEach(V8Value::release);
