@@ -1,3 +1,4 @@
+/*global __dirname*/
 import path from 'path';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
@@ -52,4 +53,4 @@ export default {
       excludeChunks: ['server']
     })
   ]
-}
+};

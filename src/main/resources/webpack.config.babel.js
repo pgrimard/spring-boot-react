@@ -1,3 +1,4 @@
+/*global __dirname*/
 import path from 'path';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -44,4 +45,4 @@ export default {
       excludeChunks: ['server']
     })
   ]
-}
+};
