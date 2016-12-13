@@ -29,15 +29,6 @@ open class Application : WebMvcConfigurerAdapter() {
         return V8ScriptTemplateConfigurer("static/polyfill.js", "public/server.js")
     }
 
-    @Bean
-    open fun init(itemRepository: ItemRepository) = CommandLineRunner {
-        itemRepository.save(Item("JavaScript", 0))
-        itemRepository.save(Item("React", 1))
-        itemRepository.save(Item("React Router", 2))
-        itemRepository.save(Item("Redux", 0))
-        itemRepository.save(Item("RxJS", 4))
-    }
-
     @Configuration
     open class RestConfiguration : RepositoryRestConfigurerAdapter() {
         override fun configureRepositoryRestConfiguration(config: RepositoryRestConfiguration?) {
