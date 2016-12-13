@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "console" }]*/
 var window = this;
 var console = {
   error: print,
