@@ -1,5 +1,6 @@
 package com.patrickgrimard.examples
 
+import org.hamcrest.Matchers.hasEntry
 import org.hamcrest.Matchers.isA
 import org.junit.Before
 import org.junit.Test
