@@ -1,5 +1,7 @@
 = Isomorphic React app with Spring Boot
 
+image:https://travis-ci.org/pgrimard/spring-boot-react.svg?branch=j2v8["Build Status", link="https://travis-ci.org/pgrimard/spring-boot-react"]
+
 This is a sample Spring Boot application that demonstrates React's server side
 rendering capabilities as well as how this works with React Router and Redux.  For more
 details, please https://patrickgrimard.io/2016/11/24/server-side-rendering-with-spring-boot-and-react/[read my blog post].
